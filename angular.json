@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "CURE-ADMIN"
+  "defaultProject": "CURE-ADMIN",
+  "cli": {
+    "analytics": "de360d89-6de0-4a94-a9af-fb0c7209d2f1"
+  }
 }

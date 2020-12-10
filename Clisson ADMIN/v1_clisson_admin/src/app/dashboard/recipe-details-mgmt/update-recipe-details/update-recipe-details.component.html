@@ -1,0 +1,111 @@
+<div class="row text-left">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Mettre à jour la recette</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <form [formGroup]="updateReciepeForm" (ngSubmit)="onUpdateReciepeFormSubmit(updateReciepeForm.value)"
+            novalidate enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" class="form-control" id="name" formControlName="name"
+                placeholder="Entrez le nom de la recette" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('name').valid && (updateReciepeForm.get('name').dirty || updateReciepeForm.get('name').touched)">
+                Le nom est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="number_of_persons">Nombre de personnes</label>
+              <input type="text" class="form-control" id="num_of_prson" formControlName="number_of_persons"
+                placeholder="Entrez le nombre de personnes" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('number_of_persons').valid && (updateReciepeForm.get('number_of_persons').dirty || updateReciepeForm.get('number_of_persons').touched)">
+                Le nombre de personnes est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="varieties_used">Varieties Used</label>
+              <input type="text" class="form-control" id="variety_used" formControlName="varieties_used"
+                placeholder="Entrez les variétés utilisées" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('varieties_used').valid && (updateReciepeForm.get('varieties_used').dirty || updateReciepeForm.get('varieties_used').touched)">
+                Les variétés utilisées sont obligatoires</small>
+            </div>
+
+            <div class="form-group">
+              <label for="ingredients">Ingrédients</label>
+              <quill-editor placeholder="Entrez les ingrédients utilisés pour cette recette" style="height: 200px;"
+                formControlName="ingredients" required>
+              </quill-editor>
+            </div>
+            <div class="form-group">
+              <label for="ingredients">Étapes de préparation</label>
+              <quill-editor placeholder="Entrez les étapes de préparations pour cette recette" style="height: 200px"
+                formControlName="preparation_steps" required>
+              </quill-editor>
+
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('preparation_steps').valid && (updateReciepeForm.get('preparation_steps').dirty || updateReciepeForm.get('preparation_steps').touched)">
+                Les étapes de préparation sont obligatoires</small>
+            </div>
+
+            <div class="form-group">
+              <label for="More">Plus</label>
+              <textarea rows="3" class="form-control" id="more" formControlName="more"
+                placeholder="Entrez les plus de cette recette">
+              </textarea>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('more').valid && (updateReciepeForm.get('more').dirty || updateReciepeForm.get('more').touched)">
+                Plus sont obligatoires</small>
+            </div>
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <ng-select [items]="statusData" bindLabel="value" bindValue="id" placeholder="Sélectionnez le statut"
+                [(ngModel)]="selectedStatus" formControlName="status">
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateReciepeForm.get('status').valid && (updateReciepeForm.get('status').dirty || updateReciepeForm.get('status').touched)">
+                Le statut est requis</small>
+            </div>
+            <div class="form-group">
+              <label for="reletedprod">Sélectionnez les produits liés</label>
+              <ng-select [items]="allRecipeList" bindLabel="name" bindValue="id" [multiple]="true"
+                placeholder="Sélectionnez un produit reloué" formControlName="reletedprod">
+              </ng-select>
+            </div>
+            <div>
+              <span>
+                Remarque: assurez-vous que la résolution de l'image téléchargée est 1080x576 et que la taille de
+                l'image n'est pas supérieure à 150 ko.
+              </span>
+            </div>
+            <div class="form-group custom-file  mx-auto d-block">
+              <section id="file-upload ml-0 col-md-3">
+                <label class="custom-file">Sélectionnez l'image</label>
+                <input type="file" formControlName="recipe_img" (change)="handleFileInput($event.target.files)"
+                  accept="image/*" multiple>
+                <span class="custom-file-control"></span>
+                <small class="form-text text-muted danger"
+                  *ngIf="!updateReciepeForm.get('recipe_img').valid && (updateReciepeForm.get('recipe_img').dirty || updateReciepeForm.get('recipe_img').touched)">
+                  Sélectionnez l'image</small>
+              </section>
+            </div>
+            <div class="form-group row" *ngIf="updateRecord?.picture[0].images">
+              <div *ngFor="let item of updateRecord.picture;let i = index">
+                <i class="fa fa-fw fa-times" (click)="onRemoveImg(item)" style="cursor: pointer;"
+                  *ngIf="updateRecord.picture.length>1"></i>
+                <img src="{{imgUrl}}{{item.images}}" style="height: 100px;width: 100px; margin: 30px 10px;">
+              </div>
+            </div>
+            <div class="form-group text-right" style="align-content: center;">
+              <button type="button" (click)="onClickCancel()" class="btn btn-danger btn-raised mr-1">Annuler</button>
+              <button type="submit" class="btn btn-success btn-raised"
+                [disabled]="!updateReciepeForm.valid">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row text-left">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Ajouter une nouvelle espèce</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <form [formGroup]="add_var_cat_form" (ngSubmit)="onAddVariety(add_var_cat_form.value)" novalidate>
+            <div class="form-group">
+              <label for="inputEmail">Nom</label>
+              <input type="text" class="form-control" id="name" formControlName="name" required
+                placeholder="Entrez le nom de l'espèce">
+              <small class="form-text text-muted danger"
+                *ngIf="!add_var_cat_form.get('name').valid && (add_var_cat_form.get('name').dirty || add_var_cat_form.get('name').touched)">
+                Entrez le nom de l'espèce</small>
+            </div>
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <ng-select [items]="statusData" bindLabel="value" bindValue="id" placeholder="Sélectionnez le statut"
+                [(ngModel)]="selectedStatus" formControlName="status">
+              </ng-select>
+              <small class="form-text text-muted danger"
+              *ngIf="!add_var_cat_form.get('status').valid && (add_var_cat_form.get('status').dirty || add_var_cat_form.get('status').touched)">
+              Le statut est requis</small>
+            </div>
+            <div>
+              <span>
+                Remarque: assurez-vous que la résolution de l'image téléchargée est 1080x576 et que la taille de
+                l'image n'est pas supérieure à 150 ko.
+              </span> 
+            </div>
+            <div class="form-group custom-file  mx-auto d-block">
+              <section id="file-upload ml-0 col-md-3">
+                <label class="custom-file">Sélectionnez l'image</label>
+                <input type="file" formControlName="varietyCat_img" (change)="fileChange($event)" accept="image/*">
+                <span class="custom-file-control"></span>
+                <small class="form-text text-muted danger"
+                  *ngIf="!add_var_cat_form.get('varietyCat_img').valid && (add_var_cat_form.get('varietyCat_img').dirty || add_var_cat_form.get('varietyCat_img').touched)">
+                  Sélectionnez l'image</small>
+              </section>
+            </div>
+
+            <div class="form-group text-right" style="align-content: center;">
+              <button type="button" (click)="onClickCancel()" class="btn btn-danger btn-raised mr-1">Annuler</button>
+              <button type="submit" class="btn btn-success btn-raised"
+                [disabled]="!add_var_cat_form.valid">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="row text-left">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Ajouter un nouveau conseil de culture</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <form [formGroup]="CropAdviceForm" (ngSubmit)="onSubmitForm(CropAdviceForm.value)" novalidate>
+            <div class="form-group">
+              <label for="variety_id">Sélectionnez une variété</label>
+              <ng-select [items]="varietyList" bindLabel="name" bindValue="id" placeholder="Sélectionnez le Variety"
+                [(ngModel)]="selectedVariety" formControlName="variety_id">
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!CropAdviceForm.get('variety_id').valid && (CropAdviceForm.get('variety_id').dirty || CropAdviceForm.get('variety_id').touched)">
+                La variété est obligatoire</small>
+            </div>
+            <!-- <div class="form-group">
+              <label for="reletedprod">New Field Add for Related Prodddd</label>
+              <ng-select [items]="reletedprod" bindLabel="name" bindValue="id" [multiple]="true"
+                placeholder="Séléctionnez les variétés liées" [(ngModel)]="selectedProdId"
+                formControlName="relatedVariety">
+              </ng-select>
+            </div> -->
+            <div class="form-group">
+              <label for="cropAdvice">Détail du conseil de culture</label>
+              <quill-editor placeholder="Détail du conseil de culture" style="height: 200px"
+                formControlName="cropAdvice" required>
+              </quill-editor>
+              <small class="form-text text-muted danger"
+                *ngIf="!CropAdviceForm.get('cropAdvice').valid && (CropAdviceForm.get('cropAdvice').dirty || CropAdviceForm.get('cropAdvice').touched)">
+                Le détail du conseil du culture est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <ng-select [items]="statusData" bindLabel="value" bindValue="id" placeholder="Sélectionnez le statut"
+                [(ngModel)]="selectedStatus" formControlName="status">
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!CropAdviceForm.get('status').valid && (CropAdviceForm.get('status').dirty || CropAdviceForm.get('status').touched)">
+                Le statut est requis</small>
+            </div>
+            <div class="form-group text-right" style="align-content: center;">
+              <button type="button" (click)="onClickCancel()" class="btn btn-danger btn-raised mr-1">Annuler</button>
+              <button type="submit" class="btn btn-success btn-raised"
+                [disabled]="!CropAdviceForm.valid">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

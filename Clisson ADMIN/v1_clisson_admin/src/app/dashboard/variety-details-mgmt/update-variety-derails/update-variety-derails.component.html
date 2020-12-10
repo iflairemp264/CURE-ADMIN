@@ -1,0 +1,174 @@
+<div class="row text-left">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">METTRE À JOUR LES DÉTAILS DE LA VARIÉTÉ</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <form [formGroup]="updateVarietyForm" (ngSubmit)="onSubmit(updateVarietyForm.value)" novalidate>
+            <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" class="form-control" id="name" formControlName="name"
+                placeholder="Entrez le nom des détails de la diversité" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('name').valid && (updateVarietyForm.get('name').dirty || updateVarietyForm.get('name').touched)">
+                Le nom est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea rows="3" class="form-control" id="description" formControlName="description"
+                placeholder="Entrez une description" required>
+              </textarea>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('description').valid && (updateVarietyForm.get('description').dirty || updateVarietyForm.get('description').touched)">
+                La description est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="yield">Rendement</label>
+              <input type="text" class="form-control" id="yield" formControlName="yield"
+                placeholder="Entrez le rendement" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('yield').valid && (updateVarietyForm.get('yield').dirty || updateVarietyForm.get('yield').touched)">
+                Le rendement est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="preservation">Conservation</label>
+              <input type="text" class="form-control" id="preservation" formControlName="preservation"
+                placeholder="Entrez la Conservation" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('preservation').valid && (updateVarietyForm.get('preservation').dirty || updateVarietyForm.get('preservation').touched)">
+                La conservation est obligatoire</small>
+            </div>
+          
+            <div class="form-group">
+              <label for="skinColor">Couleur de peau</label>
+              <input type="text" class="form-control" id="skinColor" formControlName="skinColor"
+                placeholder="Entrez la variété de couleur de peau" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('skinColor').valid && (updateVarietyForm.get('skinColor').dirty || updateVarietyForm.get('skinColor').touched)">
+                La couleur de peau est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="fleshColor">Couleur de la chair</label>
+              <input type="text" class="form-control" id="fleshColor" formControlName="fleshColor"
+                placeholder="Entrez la couleur de la chair" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('fleshColor').valid && (updateVarietyForm.get('fleshColor').dirty || updateVarietyForm.get('fleshColor').touched)">
+                La couleur de la chair est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="mildew_resistance">Résistance au mildiou</label>
+              <input type="text" class="form-control" id="mildew_resistance" formControlName="mildew_resistance"
+                placeholder="Entrez la résistance au mildiou" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('mildew_resistance').valid && (updateVarietyForm.get('mildew_resistance').dirty || updateVarietyForm.get('mildew_resistance').touched)">
+                La résistance au mildiou est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="maturation_time">Durée de maturation</label>
+              <input type="text" class="form-control" id="maturation_time" formControlName="maturation_time"
+                placeholder="Entrez la durée de maturation" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('maturation_time').valid && (updateVarietyForm.get('maturation_time').dirty || updateVarietyForm.get('maturation_time').touched)">
+                Le temp de maturation est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="small">Nombre de tubercules au kilo petit calibre</label>
+              <input type="number" class="form-control" id="small" formControlName="small"
+                placeholder="Entrez le nombre de tubercules au kilo petit calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('small').valid && (updateVarietyForm.get('small').dirty || updateVarietyForm.get('small').touched)">
+                Le nombre de tubercules au kilo petit calibre est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="medium">Nombre de tubercules au kilo moyen calibre</label>
+              <input type="number" class="form-control" id="medium" formControlName="medium"
+                placeholder="Entrez le nombre de tubercules au kilo moyen calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('medium').valid && (updateVarietyForm.get('medium').dirty || updateVarietyForm.get('medium').touched)">
+                Le nombre de tubercules au kilo moyen calibre est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="big">Nombre de tubercules au kilo grand calibre</label>
+              <input type="number" class="form-control" id="big" formControlName="big"
+                placeholder="Entrez le nombre de tubercules au kilo grand calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('big').valid && (updateVarietyForm.get('big').dirty || updateVarietyForm.get('big').touched)">
+                Le nombre de tubercules au kilo grand calibre est obligratoire</small>
+            </div>
+            <div class="form-group">
+              <label for="category_id">espèce</label>
+              <ng-select [items]="category" [virtualScroll]="true" bindLabel="name" bindValue="id"
+                placeholder="Choisir une catégorie" (change)="selectedOption($event)" formControlName="category_id"
+                required>
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('category_id').valid && (updateVarietyForm.get('category_id').dirty || updateVarietyForm.get('category_id').touched)">
+                L'espèce est obligatoire</small>
+            </div>
+
+            <div class="form-group">
+              <label for="reletedprod">Sélectionnez la variété liées</label>
+              <ng-select [items]="relatedVariety2" bindLabel="name" bindValue="id" [multiple]="true"
+                placeholder="Séléctionnez les variétés liées" formControlName="relatedVariety">
+              </ng-select>
+              <!-- <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('relatedVariety').valid && (updateVarietyForm.get('relatedVariety').dirty || updateVarietyForm.get('relatedVariety').touched)">
+                Une variété supprimée est requise</small> -->
+            </div>
+            
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <ng-select [items]="statusData" bindLabel="value" bindValue="id" placeholder="Sélectionner le statut"
+                [(ngModel)]="selectedStatus" formControlName="status">
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!updateVarietyForm.get('status').valid && (updateVarietyForm.get('status').dirty || updateVarietyForm.get('status').touched)">
+                Le statut est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="premium">Premium</label>
+              <ng-select [items]="PremiumData" bindLabel="value" bindValue="id"
+                placeholder="Séléectionnez le niveau premium" [(ngModel)]="seletcedPremium" formControlName="premium">
+              </ng-select>
+              <small class="form-text text-muted danger"
+              *ngIf="!updateVarietyForm.get('premium').valid && (updateVarietyForm.get('premium').dirty || updateVarietyForm.get('premium').touched)">
+              Le niveau premium est obligatoire</small>
+            </div>
+            <div>
+              <span>
+                Remarque: assurez-vous que la résolution de l'image téléchargée est 1080x576 et que la taille de
+                l'image n'est pas supérieure à 150 ko.
+              </span>
+            </div>
+            <div class="form-group custom-file  mx-auto d-block">
+              <section id="file-upload ml-0 col-md-3">
+                <label class="custom-file">Sélectionnez l'image</label>
+
+                <input type="file" formControlName="variety_Img" (change)="handleFileInput($event.target.files)"  accept="image/*"
+                  multiple>
+                <span class="custom-file-control"></span>
+                <small class="form-text text-muted danger"
+                  *ngIf="!updateVarietyForm.get('variety_Img').valid && (updateVarietyForm.get('variety_Img').dirty || updateVarietyForm.get('variety_Img').touched)">
+                  L'image est obligatoire</small>
+                <span class="custom-file-control"></span>
+              </section>
+            </div>
+            <div class="form-group row" *ngIf="updateRecord?.pictures[0].images">
+              <div *ngFor="let item of updateRecord.pictures;let i = index">
+                <i class="fa fa-fw fa-times" (click)="onRemoveImg(item)" style="cursor: pointer;" *ngIf="updateRecord.pictures.length>1"></i>
+                <img src="{{imgUrl}}{{item.images}}" style="height: 100px;width: 100px; margin: 30px 10px;">
+              </div>
+            </div>
+            <div class="form-group text-right" style="align-content: center;">
+              <button type="button" (click)="onClickCancel()" class="btn btn-danger btn-raised mr-1">Annuler</button>
+              <button type="submit" class="btn btn-success btn-raised"
+                [disabled]="!updateVarietyForm.valid">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

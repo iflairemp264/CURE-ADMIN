@@ -1,0 +1,165 @@
+<div class="row text-left">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Ajouter une nouvelle variété</h4>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <form [formGroup]="addVarietyForm" (ngSubmit)="onSubmit(addVarietyForm.value)" novalidate>
+            <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" class="form-control" id="name" formControlName="name"
+                placeholder="Entrez le nom de la variété" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('name').valid && (addVarietyForm.get('name').dirty || addVarietyForm.get('name').touched)">
+                Le nom est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea rows="3" class="form-control" id="description" formControlName="description"
+                placeholder="Entrez une description" required>
+              </textarea>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('description').valid && (addVarietyForm.get('description').dirty || addVarietyForm.get('description').touched)">
+                La description est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="yield">Rendement</label>
+              <input type="text" class="form-control" id="yield" formControlName="yield"
+                placeholder="Entrez le rendement" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('yield').valid && (addVarietyForm.get('yield').dirty || addVarietyForm.get('yield').touched)">
+                Le rendement est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="preservation">Conservation</label>
+              <input type="text" class="form-control" id="preservation" formControlName="preservation"
+                placeholder="Entrez la conservation" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('preservation').valid && (addVarietyForm.get('preservation').dirty || addVarietyForm.get('preservation').touched)">
+                La conservation est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="skinColor">Couleur de peau</label>
+              <input type="text" class="form-control" id="skinColor" formControlName="skinColor"
+                placeholder="Entrez la variété de couleur de peau" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('skinColor').valid && (addVarietyForm.get('skinColor').dirty || addVarietyForm.get('skinColor').touched)">
+                La couleur de peau est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="fleshColor">Couleur de la chair</label>
+              <input type="text" class="form-control" id="fleshColor" formControlName="fleshColor"
+                placeholder="Entrez la couleur de la chair" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('fleshColor').valid && (addVarietyForm.get('fleshColor').dirty || addVarietyForm.get('fleshColor').touched)">
+                La couleur de la chair est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="mildew_resistance">Résistance au mildiou</label>
+              <input type="text" class="form-control" id="mildew_resistance" formControlName="mildew_resistance"
+                placeholder="Entrez la résistance au mildiou" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('mildew_resistance').valid && (addVarietyForm.get('mildew_resistance').dirty || addVarietyForm.get('mildew_resistance').touched)">
+                La résistance au mildiou est obligatoire</small>
+            </div>
+
+            <div class="form-group">
+              <label for="maturation_time">Durée de maturation</label>
+              <input type="text" class="form-control" id="maturation_time" formControlName="maturation_time"
+                placeholder="Entrez la durée de maturation" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('maturation_time').valid && (addVarietyForm.get('maturation_time').dirty || addVarietyForm.get('maturation_time').touched)">
+                Le temp de maturation est obligatoire</small>
+            </div>
+
+            <div class="form-group">
+              <label for="small">Nombre de tubercules au kilo petit calibre</label>
+              <input type="number" class="form-control" id="small" formControlName="small"
+                placeholder="Entrez le nombre de tubercules au kilo petit calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('small').valid && (addVarietyForm.get('small').dirty || addVarietyForm.get('small').touched)">
+                Le nombre de tubercules au kilo petit calibre est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="medium">Nombre de tubercules au kilo moyen calibre</label>
+              <input type="number" class="form-control" id="medium" formControlName="medium"
+                placeholder="Entrez le nombre de tubercules au kilo moyen calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('medium').valid && (addVarietyForm.get('medium').dirty || addVarietyForm.get('medium').touched)">
+                Le nombre de tubercules au kilo moyen calibre est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="big">Nombre de tubercules au kilo grand calibre</label>
+              <input type="number" class="form-control" id="big" formControlName="big"
+                placeholder="Entrez le nombre de tubercules au kilo grand calibre" required>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('big').valid && (addVarietyForm.get('big').dirty || addVarietyForm.get('big').touched)">
+                Le nombre de tubercules au kilo grand calibre est obligratoire</small>
+            </div>
+
+            <div class="form-group">
+              <label for="category_id">espèce</label>
+              <ng-select [items]="category" [virtualScroll]="true" bindLabel="name" bindValue="id"
+                placeholder="Choisir une catégorie" (change)="selectedOption($event)" formControlName="category_id" required>
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('category_id').valid && (addVarietyForm.get('category_id').dirty || addVarietyForm.get('category_id').touched)">
+                L'espèce est obligatoire</small>
+            </div>
+
+            <div class="form-group">
+              <label for="reletedprod">Séléctionnez les variétés liées</label>
+              <ng-select [items]="reletedprod" bindLabel="name" bindValue="id" [multiple]="true"
+                placeholder="Séléctionnez les variétés liées" [(ngModel)]="selectedProdId" formControlName="relatedVariety" >
+              </ng-select>
+
+            </div>
+            <div class="form-group">
+              <label for="status">Statut</label>
+              <ng-select [items]="statusData" bindLabel="value" bindValue="id" placeholder="Sélectionnez le statut"
+                [(ngModel)]="selectedStatus" formControlName="status" >
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('status').valid && (addVarietyForm.get('status').dirty || addVarietyForm.get('status').touched)">
+                Le statut est obligatoire</small>
+            </div>
+            <div class="form-group">
+              <label for="premium">Premium</label>
+              <ng-select [items]="PremiumData" bindLabel="value" bindValue="id" placeholder="Séléectionnez le niveau premium"
+                [(ngModel)]="seletcedPremium" formControlName="premium">
+              </ng-select>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('premium').valid && (addVarietyForm.get('premium').dirty || addVarietyForm.get('premium').touched)">
+                Le niveau premium est obligatoire</small>
+            </div>
+            <div>
+              <span>
+                Remarque: assurez-vous que la résolution de l'image téléchargée est 1080x576 et que la taille de
+                l'image n'est pas supérieure à 150 ko.
+              </span> 
+            </div>
+            <div class="form-group custom-file  mx-auto d-block">
+              <section id="file-upload ml-0 col-md-3">
+                <label class="custom-file">Sélectionnez l'image</label>
+                <input type="file" formControlName="variety_images" (change)="handleFileInput($event.target.files)"
+                  accept="image/*" multiple>
+                <span class="custom-file-control"></span>
+              </section>
+              <small class="form-text text-muted danger"
+                *ngIf="!addVarietyForm.get('variety_images').valid && (addVarietyForm.get('variety_images').dirty || addVarietyForm.get('variety_images').touched)">
+                L'image est obligatoire</small>
+            </div>
+
+            <div class="form-group text-right" style="align-content: center;">
+              <button type="button" (click)="onClickCancel()" class="btn btn-danger btn-raised mr-1">Annuler</button>
+              <button type="submit" class="btn btn-success btn-raised"
+                [disabled]="!addVarietyForm.valid">Soumettre</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

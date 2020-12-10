@@ -1,0 +1,74 @@
+<!-- name, pictures, description, attributes -->
+
+<!-- udser list -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title" style="text-align: center;">Liste des variétés</h4>
+        <hr>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary">
+              <a class="text-decoration-none text-white" [routerLink]="['/variety/add']"
+                routerLinkActive="router-link-active">Ajouter une variété</a>
+            </button>
+          </div>
+          <div class="col col-4">
+            <div class="input-group">
+              <input (input)=searchRecord($event.target.value) class="form-control" placeholder="Chercher">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-content">
+        <table class="table table-responsive-sm text-center">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th (click)="shortRecord()" style="cursor: pointer;">Nom</th>
+              <th>Image</th>
+              <th>Statut</th>
+              <th>Action</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of variety; let i = index">
+              <td>{{((pageNo-1)*10)+(i+1)}}</td>
+              <td>{{item.name}}</td>
+              <td>
+                <img src="{{this.imgurl}}{{item.image}}" height="100" width="150">
+              </td>
+              <td>
+                <ui-switch class="small" [checked]='item.status === "0" ? true : false'
+                  (change)="onChange(item.status,item.id)"></ui-switch>
+              </td>
+              <td>
+                <div>
+                  <span>
+                    <i class="icon-pencil" style="cursor: pointer;" [routerLink]="['/variety/edit']"
+                      routerLinkActive="router-link-active" [queryParams]="{id:item.id}"></i>
+                  </span>&nbsp;
+                  <span>&nbsp;
+                    <i class="icon-trash" style="cursor: pointer;" (click)=onDeleteConfirm(item.id)></i>
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pag" *ngIf="maxPage > 1 || search == false ">
+          <ngb-pagination [collectionSize]="total_records" [(page)]="pageNo" [rotate]="true" [ellipses]="false"
+            (pageChange)="VarietyList(pageNo)"></ngb-pagination>
+          <hr>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
